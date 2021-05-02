@@ -18,3 +18,9 @@ def getHorizontalHistogram(img):
 
 def getVerticalHistogram(img):
     return img.shape[0] - np.sum(img,axis=0,keepdims=True)/255
+
+def applyGrayscale(img):
+    return img
+
+def applyNoiseRemoval(img):
+    return cv.GaussianBlur(img,(5,5),0)
