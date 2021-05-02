@@ -4,6 +4,10 @@ from scipy.signal import find_peaks
 
 from image import writeImage, cropImageHorizontal, cropImageVertical, getHorizontalHistogram, getVerticalHistogram 
 
+def adaptiveThreshold(img):
+     return cv.adaptiveThreshold(img,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
+                cv.THRESH_BINARY,11,2)
+
 def getLocalMinimas(array):
     return find_peaks(-array)
 
