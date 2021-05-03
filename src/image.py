@@ -1,3 +1,4 @@
+import time
 import cv2 as cv
 import numpy as np
 
@@ -6,6 +7,11 @@ def readImage(path):
 
 def writeImage(img, name):
     cv.imwrite(name, img)
+
+def writeImagesList(imgList, path, format):
+    for index, img in enumerate(imgList):
+        ts = str(time.time())
+        writeImage(img, path + "img_" + ts + "_" + str(index) + format)
 
 def cropImageHorizontal(img, start, end):
     return img[start:end, :]
