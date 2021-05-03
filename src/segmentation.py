@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import cv2 as cv
 from scipy.signal import find_peaks
 
 from image import writeImage, cropImageHorizontal, cropImageVertical, getHorizontalHistogram, getVerticalHistogram 
@@ -24,9 +25,6 @@ def horizontalSegmentation(horizontalHistogram, img):
             continue
         horizontalCutImages.append(cropImageHorizontal(img, previousPeak, peak))
         previousPeak = peak
-    # saves the images generated from previous step
-    for i, img in enumerate(horizontalCutImages):
-        writeImage(img, "src/outputImages/horizontalSegmentation/img_" + str(i) + ".jpg")
     return horizontalCutImages
 
 def verticalSegmentation(histogram, img):
@@ -37,9 +35,6 @@ def verticalSegmentation(histogram, img):
     for peak in lowerPeaks[0]:
         images.append(cropImageVertical(img, previousPeak, peak))
         previousPeak = peak
-    # saves the images generated from previous step
-    #for i, img in enumerate(images):
-        #writeImage(img, "src/outputImages/verticalSegmentation/img_" + str(time.time()) + "_" + str(i) + ".jpg")
     return images
 
 def lineLevelSegmentation(binaryImage):
