@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-from image import readImage, applyGrayscale, applyNoiseRemoval
+from image import readImage, writeImagesList, applyGrayscale, applyNoiseRemoval
 from segmentation import adaptiveThreshold, lineLevelSegmentation, wordLevelSegmentation
 from plot import plotImage, plotHistogram
 
@@ -20,13 +20,16 @@ def main():
 
     # applies a segmentation that returns an array of text lines
     lineImages = lineLevelSegmentation(binaryInputImage)
-    # TODO: here it should call a function to save this list of images 
+    writeImagesList(lineImages, "src/outputImages/horizontalSegmentation/", ".jpg") # writes the line images on the path folder
 
     # applies a segmentation on each line that returns an array of words from that text line
     wordsImages = []
     for line in lineImages:
         wordsImages.append(wordLevelSegmentation(line))
-    # TODO: here it should call a function to save this list of images
+    
+    # it writes the image files for each words list in wordImages 
+    for line in wordsImages:
+        writeImagesList(line, "src/outputImages/verticalSegmentation/", ".jpg") # writes the words images on the path folder
 
 if __name__ == "__main__":
     main()
